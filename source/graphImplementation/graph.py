@@ -44,6 +44,18 @@ class Node(object):
         if self.__mother is None and parent.__gender == "female":
             parent.add_child(self)
 
+    def add_spouse(self, spouse):
+        if self.__spouse is None:
+            self.__spouse = spouse
+            self.__spouse.__spouse = self
+            if spouse.__gender == "male":
+                for i in self.__children:
+                    i.__father = spouse
+            else:
+                for i in self.__children:
+                    i.__mother = spouse
+            self.__spouse.__children = self.__children
+
 
 class Graph(object):
 
