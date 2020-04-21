@@ -24,6 +24,10 @@ class Node(object):
         self.__name = name
 
     def add_child(self, child):
+        """
+        adds child to person, adds child to person`s spouse (if is not None)
+        adds parents to this person
+        """
         if self.__gender == "male":
             self.__children.append(child)
             child.__father = self
@@ -39,12 +43,20 @@ class Node(object):
                 child.__father = self.__spouse
 
     def add_parent(self, parent):
+        """
+        if parent in None adds parent to this person
+        adds this person as child to parent and his spouse (if is not None)
+        """
         if self.__father is None and parent.__gender == "male":
             parent.add_child(self)
         if self.__mother is None and parent.__gender == "female":
             parent.add_child(self)
 
     def add_spouse(self, spouse):
+        """
+        adds spouse to person, adds new parent to children
+        adds children to spouse
+        """
         if self.__spouse is None:
             self.__spouse = spouse
             self.__spouse.__spouse = self
