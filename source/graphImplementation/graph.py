@@ -1,23 +1,42 @@
-
 class Node(object):
 
-    def __init__(self, name, father=None, mother=None, spouse=None):
+    def __init__(self, gender, name, father=None, mother=None, spouse=None):
         """
         initializes a node object
-        name is required
-        father and mother are not required
+        gender, name are required
+        gender = "male" or "female"
+        father, mother, spouse are not required
         """
+        self.__gender = gender
         self.__name = name
         self.__father = father
         self.__mother = mother
         self.__spouse = spouse
         self.__children = []
 
+    def get_gender(self):
+        return self.__gender
+
     def get_name(self):
         return self.__name
 
     def change_name(self, name):
         self.__name = name
+
+    def add_child(self, child=None):
+        if self.__gender == "male":
+            self.__children.append(child)
+            child.__father = self
+            if self.__spouse is not None:
+                self.__spouse.__children.append(child)
+                child.__mother = self.__spouse
+
+        if self.__gender == "female":
+            self.__children.append(child)
+            child.__mother = self
+            if self.__spouse is not None:
+                self.__spouse.__children.append(child)
+                child.__father = self.__spouse
 
 
 class Graph(object):
