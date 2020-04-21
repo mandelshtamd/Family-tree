@@ -68,10 +68,25 @@ class Node(object):
                     i.__mother = spouse
             self.__spouse.__children = self.__children
 
+    def get_person(self, name):
+        for i in self.__children:
+            if i.get_name == name:
+                return i
+            if i.get_person(name).get_name == name:
+                return i.get_person(name)
+        return None
+
 
 class Graph(object):
 
-    def __init__(self, root):
+    def __init__(self, root=None):
         self.__root = root
 
-
+    def get_person(self, name):
+        """
+        looks for a person by name and returns Node with him
+        """
+        for i in self.__root.__children:
+            if i.get_person() is not None:
+                return i.get_person()
+        return None
