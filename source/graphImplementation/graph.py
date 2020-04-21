@@ -23,7 +23,7 @@ class Node(object):
     def change_name(self, name):
         self.__name = name
 
-    def add_child(self, child=None):
+    def add_child(self, child):
         if self.__gender == "male":
             self.__children.append(child)
             child.__father = self
@@ -37,6 +37,9 @@ class Node(object):
             if self.__spouse is not None:
                 self.__spouse.__children.append(child)
                 child.__father = self.__spouse
+
+    def add_parent(self, parent):
+        parent.add_child(self)
 
 
 class Graph(object):
