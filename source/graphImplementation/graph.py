@@ -1,13 +1,33 @@
 
+class Node(object):
+
+    def __init__(self, name, father=None, mother=None, spouse=None):
+        """
+        initializes a node object
+        name is required
+        father and mother are not required
+        """
+        self.__name = name
+        self.__father = father
+        self.__mother = mother
+        self.__spouse = spouse
+        self.__children = []
+
+    def get_name(self):
+        return self.__name
+
+    def change_name(self, name):
+        self.__name = name
+
 
 class Graph(object):
 
-    def __init__(self, graph_dict = None):
+    def __init__(self, graph_dict=None):
         """ initializes a graph object
             If no dictionary or None is given,
             an empty dictionary will be used
         """
-        if graph_dict == None:
+        if graph_dict is None:
             graph_dict = {}
         self.__graph_dict = graph_dict
 
