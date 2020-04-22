@@ -104,6 +104,8 @@ class Graph(object):
         """
         looks for a person by name and returns Node with him
         """
+        if self.get_root().get_name() == name:
+            return self.__root
         for i in self.__root.get_children():
             if i.get_name() == name:
                 return i
@@ -126,3 +128,14 @@ class Graph(object):
             person = self.get_person(name_to_whom)
             person.add_spouse(spouse)
 
+
+# Some tests
+a = Node("male", "Bobby")
+print(a.get_gender(), a.get_name())
+b = Node("male", "Ron")
+c = Node("female", "Lily")
+
+tree = Graph(a)
+tree.add_child("Bobby", b)
+tree.add_parent("Bobby", c)
+print(tree.get_root().get_name())
