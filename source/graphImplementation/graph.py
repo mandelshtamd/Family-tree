@@ -116,6 +116,7 @@ class Graph(object):
     def add_parent(self, name_to_whom, parent):
         person = self.get_person(name_to_whom)
         person.add_parent(parent)
+        self.__root = parent
 
     def add_spouse(self, name_to_whom, spouse):
         person = self.get_person(name_to_whom)
