@@ -111,13 +111,18 @@ class Graph(object):
 
     def add_child(self, name_to_whom, child):
         person = self.get_person(name_to_whom)
-        person.add_child(child)
+        if person is not None:
+            person.add_child(child)
 
     def add_parent(self, name_to_whom, parent):
         person = self.get_person(name_to_whom)
-        person.add_parent(parent)
-        self.__root = parent
+        if person is not None:
+            person.add_parent(parent)
+            self.__root = parent
 
     def add_spouse(self, name_to_whom, spouse):
         person = self.get_person(name_to_whom)
-        person.add_spouse(spouse)
+        if person is not None:
+            person = self.get_person(name_to_whom)
+            person.add_spouse(spouse)
+
