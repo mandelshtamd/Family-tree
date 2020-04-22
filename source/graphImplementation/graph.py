@@ -130,12 +130,12 @@ class Graph(object):
 
 
 # Some tests
-a = Node("male", "Bobby")
-print(a.get_gender(), a.get_name())
-b = Node("male", "Ron")
-c = Node("female", "Lily")
-
-tree = Graph(a)
-tree.add_child("Bobby", b)
-tree.add_parent("Bobby", c)
-print(tree.get_root().get_name())
+# a = Node("male", "Bobby")
+# print(a.get_gender(), a.get_name())
+# b = Node("male", "Ron")
+# c = Node("female", "Lily")
+#
+# tree = Graph(a)
+# tree.add_child("Bobby", b)
+# tree.add_parent("Bobby", c)
+# print(tree.get_root().get_name())
