@@ -1,53 +1,141 @@
+class Node(object):
+
+    def __init__(self, gender, name, father=None, mother=None, spouse=None):
+        """
+        initializes a node object
+        gender, name are required
+        gender = "male" or "female"
+        father, mother, spouse are not required
+        """
+        self.__gender = gender
+        self.__name = name
+        self.__father = father
+        self.__mother = mother
+        self.__spouse = spouse
+        self.__children = []
+
+    def get_gender(self):
+        return self.__gender
+
+    def get_name(self):
+        return self.__name
+
+    def get_children(self):
+        return self.__children
+
+    def get_father(self):
+        return self.__father
+
+    def get_mother(self):
+        return self.__mother
+
+    def get_spouse(self):
+        return self.__spouse
+
+    def change_name(self, name):
+        self.__name = name
+
+    def add_child(self, child):
+        """
+        adds child to person, adds child to person`s spouse (if is not None)
+        adds parents to this person
+        """
+        if self.__gender == "male":
+            self.__children.append(child)
+            child.__father = self
+            if self.__spouse is not None:
+                self.__spouse.__children.append(child)
+                child.__mother = self.__spouse
+
+        if self.__gender == "female":
+            self.__children.append(child)
+            child.__mother = self
+            if self.__spouse is not None:
+                self.__spouse.__children.append(child)
+                child.__father = self.__spouse
+
+    def add_parent(self, parent):
+        """
+        if parent in None adds parent to this person
+        adds this person as child to parent and his spouse (if is not None)
+        """
+        if self.__father is None and parent.__gender == "male":
+            parent.add_child(self)
+        if self.__mother is None and parent.__gender == "female":
+            parent.add_child(self)
+
+    def add_spouse(self, spouse):
+        """
+        adds spouse to person, adds new parent to children
+        adds children to spouse
+        """
+        if self.__spouse is None:
+            self.__spouse = spouse
+            self.__spouse.__spouse = self
+            if spouse.__gender == "male":
+                for i in self.__children:
+                    i.__father = spouse
+            else:
+                for i in self.__children:
+                    i.__mother = spouse
+            self.__spouse.__children = self.__children
+
+    def get_person(self, name):
+        """
+        looking for a person by name and returns Node with him
+        """
+        for i in self.__children:
+            if i.get_name == name:
+                return i
+            if i.get_person(name).get_name == name:
+                return i.get_person(name)
+        return None
 
 
 class Graph(object):
 
-    def __init__(self, graph_dict = None):
-        """ initializes a graph object
-            If no dictionary or None is given,
-            an empty dictionary will be used
+    def __init__(self, root):
+        self.__root = root
+
+    def get_root(self):
+        return self.__root
+
+    def get_person(self, name):
         """
-        if graph_dict == None:
-            graph_dict = {}
-        self.__graph_dict = graph_dict
-
-    def vertices(self):
-        """ returns the vertices of a graph """
-        return list(self.__graph_dict.keys())
-
-    def edges(self):
-        """ returns the edges of a graph """
-        return self.__generate_edges()
-
-    def add_vertex(self, vertex):
-        """ If the vertex "vertex" is not in
-            self.__graph_dict, a key "vertex" with an empty
-            list as a value is added to the dictionary.
-            Otherwise nothing has to be done.
+        looks for a person by name and returns Node with him
         """
-        if vertex not in self.__graph_dict:
-            self.__graph_dict[vertex] = []
+        if self.get_root().get_name() == name:
+            return self.__root
+        for i in self.__root.get_children():
+            if i.get_name() == name:
+                return i
+        return None
 
-    def add_edge(self, edge):
-        """ assumes that edge is of type set, tuple or list;
-            between two vertices can be multiple edges!
-        """
-        edge = set(edge)
-        (vertex1, vertex2) = tuple(edge)
-        if vertex1 in self.__graph_dict:
-            self.__graph_dict[vertex1].append(vertex2)
-        else:
-            self.__graph_dict[vertex1] = [vertex2]
+    def add_child(self, name_to_whom, child):
+        person = self.get_person(name_to_whom)
+        if person is not None:
+            person.add_child(child)
 
-    def __generate_edges(self):
-        """ A static method generating the edges of the
-            graph "graph". Edges are represented as sets
-            with one (a loop back to the vertex) or two
-            vertices
-        """
-        edges = []
-        for vertex in self.__graph_dict:
-            for neighbour in self.__graph_dict[vertex]:
-                if {neighbour, vertex} not in edges:
-                    edges.append({vertex, neighbour})
-        return edges
+    def add_parent(self, name_to_whom, parent):
+        person = self.get_person(name_to_whom)
+        if person is not None:
+            person.add_parent(parent)
+            self.__root = parent
+
+    def add_spouse(self, name_to_whom, spouse):
+        person = self.get_person(name_to_whom)
+        if person is not None:
+            person = self.get_person(name_to_whom)
+            person.add_spouse(spouse)
+
+
+# Some tests
+# a = Node("male", "Bobby")
+# print(a.get_gender(), a.get_name())
+# b = Node("male", "Ron")
+# c = Node("female", "Lily")
+#
+# tree = Graph(a)
+# tree.add_child("Bobby", b)
+# tree.add_parent("Bobby", c)
+# print(tree.get_root().get_name())
