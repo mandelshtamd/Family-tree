@@ -20,6 +20,18 @@ class Node(object):
     def get_name(self):
         return self.__name
 
+    def get_children(self):
+        return self.__children
+
+    def get_father(self):
+        return self.__father
+
+    def get_mother(self):
+        return self.__mother
+
+    def get_spouse(self):
+        return self.__spouse
+
     def change_name(self, name):
         self.__name = name
 
@@ -69,6 +81,9 @@ class Node(object):
             self.__spouse.__children = self.__children
 
     def get_person(self, name):
+        """
+        looking for a person by name and returns Node with him
+        """
         for i in self.__children:
             if i.get_name == name:
                 return i
@@ -79,14 +94,29 @@ class Node(object):
 
 class Graph(object):
 
-    def __init__(self, root=None):
+    def __init__(self, root):
         self.__root = root
+
+    def get_root(self):
+        return self.__root
 
     def get_person(self, name):
         """
         looks for a person by name and returns Node with him
         """
-        for i in self.__root.__children:
-            if i.get_person() is not None:
-                return i.get_person()
+        for i in self.__root.get_children():
+            if i.get_name() == name:
+                return i
         return None
+
+    def add_child(self, name_to_whom, child):
+        person = self.get_person(name_to_whom)
+        person.add_child(child)
+
+    def add_parent(self, name_to_whom, parent):
+        person = self.get_person(name_to_whom)
+        person.add_parent(parent)
+
+    def add_spouse(self, name_to_whom, spouse):
+        person = self.get_person(name_to_whom)
+        person.add_spouse(spouse)
