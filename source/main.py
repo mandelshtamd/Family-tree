@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'myDesign.ui'
-#
-# Created by: PyQt5 UI code generator 5.5.1
-#
-# WARNING! All changes made in this file will be lost!
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton
@@ -24,7 +17,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("source/фон4.png"))
+        self.label.setPixmap(QtGui.QPixmap("./фон4.png"))
         self.label.setObjectName("label")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(0, 0, 271, 51))
@@ -89,12 +82,12 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(10, 0, 51, 41))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("source/icon3.png"))
+        self.label_2.setPixmap(QtGui.QPixmap("./icon3.png"))
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(950, 10, 31, 31))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("source/leave1.png"))
+        self.label_3.setPixmap(QtGui.QPixmap("./leave1.png"))
         self.label_3.setObjectName("label_3")
         self.pushButton_7 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_7.setGeometry(QtCore.QRect(690, 70, 131, 41))
@@ -143,22 +136,22 @@ class Ui_MainWindow(object):
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(1030, 70, 31, 41))
         self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("source/treesearch.PNG"))
+        self.label_4.setPixmap(QtGui.QPixmap("./treesearch.PNG"))
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(890, 70, 31, 31))
         self.label_5.setText("")
-        self.label_5.setPixmap(QtGui.QPixmap("source/cross.png"))
+        self.label_5.setPixmap(QtGui.QPixmap("./cross.png"))
         self.label_5.setObjectName("label_5")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(790, 70, 31, 31))
         self.label_6.setText("")
-        self.label_6.setPixmap(QtGui.QPixmap("source/save.png"))
+        self.label_6.setPixmap(QtGui.QPixmap("./save.png"))
         self.label_6.setObjectName("label_6")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(690, 70, 41, 31))
         self.label_7.setText("")
-        self.label_7.setPixmap(QtGui.QPixmap("source/share.PNG"))
+        self.label_7.setPixmap(QtGui.QPixmap("./share.PNG"))
         self.label_7.setObjectName("label_7")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -169,8 +162,6 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -185,7 +176,17 @@ class Ui_MainWindow(object):
         self.pushButton_9.setText(_translate("MainWindow", "Delete"))
         self.pushButton_10.setText(_translate("MainWindow", "Tree search"))
 
+
+class mywindow(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(mywindow, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.ui.retranslateUi(self)
+
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    interface = Ui_MainWindow()
-    sys.exit(app.exec_(
+    app = QtWidgets.QApplication([])
+    application = mywindow()
+    application.show()
+
+    sys.exit(app.exec_())
