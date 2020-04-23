@@ -1,10 +1,12 @@
 import sys
-from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
+from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication, QPushButton, QMainWindow
+from PyQt5 import uic
 
 
-class Example(QWidget):
+class Example(QMainWindow):
     def __init__(self):
         super().__init__()
+        uic.loadUi("myDesign.ui", self)
         self.initUI()
 
 
