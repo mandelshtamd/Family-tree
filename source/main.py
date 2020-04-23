@@ -1,32 +1,191 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'myDesign.ui'
+#
+# Created by: PyQt5 UI code generator 5.5.1
+#
+# WARNING! All changes made in this file will be lost!
 import sys
-from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication, QPushButton, QMainWindow
-from PyQt5 import uic
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton
 
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1184, 858)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(-10, 0, 1201, 801))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label.setFont(font)
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("source/фон4.png"))
+        self.label.setObjectName("label")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(0, 0, 271, 51))
+        font = QtGui.QFont()
+        font.setFamily("Serif")
+        font.setPointSize(14)
+        font.setItalic(True)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("background-color: rgb(18, 18, 18);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(240, 0, 111, 51))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_2.setFont(font)
+        self.pushButton_2.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_3.setGeometry(QtCore.QRect(349, 0, 171, 51))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_3.setFont(font)
+        self.pushButton_3.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_4.setGeometry(QtCore.QRect(510, 0, 121, 51))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_4.setFont(font)
+        self.pushButton_4.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_5.setGeometry(QtCore.QRect(620, 0, 291, 51))
+        self.pushButton_5.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_5.setText("")
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.pushButton_6 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_6.setGeometry(QtCore.QRect(900, 0, 291, 51))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_6.setFont(font)
+        self.pushButton_6.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(10, 0, 51, 41))
+        self.label_2.setText("")
+        self.label_2.setPixmap(QtGui.QPixmap("source/icon3.png"))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(950, 10, 31, 31))
+        self.label_3.setText("")
+        self.label_3.setPixmap(QtGui.QPixmap("source/leave1.png"))
+        self.label_3.setObjectName("label_3")
+        self.pushButton_7 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_7.setGeometry(QtCore.QRect(690, 70, 131, 41))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_7.setFont(font)
+        self.pushButton_7.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_7.setObjectName("pushButton_7")
+        self.pushButton_8 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_8.setGeometry(QtCore.QRect(790, 70, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_8.setFont(font)
+        self.pushButton_8.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_8.setObjectName("pushButton_8")
+        self.pushButton_9 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_9.setGeometry(QtCore.QRect(890, 70, 141, 41))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_9.setFont(font)
+        self.pushButton_9.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_9.setObjectName("pushButton_9")
+        self.pushButton_10 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_10.setGeometry(QtCore.QRect(1030, 70, 161, 41))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_10.setFont(font)
+        self.pushButton_10.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_10.setObjectName("pushButton_10")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(1030, 70, 31, 41))
+        self.label_4.setText("")
+        self.label_4.setPixmap(QtGui.QPixmap("source/treesearch.PNG"))
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setGeometry(QtCore.QRect(890, 70, 31, 31))
+        self.label_5.setText("")
+        self.label_5.setPixmap(QtGui.QPixmap("source/cross.png"))
+        self.label_5.setObjectName("label_5")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(790, 70, 31, 31))
+        self.label_6.setText("")
+        self.label_6.setPixmap(QtGui.QPixmap("source/save.png"))
+        self.label_6.setObjectName("label_6")
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
+        self.label_7.setGeometry(QtCore.QRect(690, 70, 41, 31))
+        self.label_7.setText("")
+        self.label_7.setPixmap(QtGui.QPixmap("source/share.PNG"))
+        self.label_7.setObjectName("label_7")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1184, 19))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
 
-class Example(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        uic.loadUi("myDesign.ui", self)
-        self.initUI()
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-
-    def initUI(self):
-        self.resize(500, 500)
-        self.center()
-
-        self.setWindowTitle('Family tree')
-        self.show()
-
-
-    def center(self):
-        qr = self.frameGeometry()
-        cp = QDesktopWidget().availableGeometry().center()
-        qr.moveCenter(cp)
-
-        self.move(qr.topLeft())
-
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.pushButton.setText(_translate("MainWindow", "GeneTreetion"))
+        self.pushButton_2.setText(_translate("MainWindow", "My trees"))
+        self.pushButton_3.setText(_translate("MainWindow", "Language"))
+        self.pushButton_4.setText(_translate("MainWindow", "Help"))
+        self.pushButton_6.setText(_translate("MainWindow", "Project name"))
+        self.pushButton_7.setText(_translate("MainWindow", "Share"))
+        self.pushButton_8.setText(_translate("MainWindow", "Save"))
+        self.pushButton_9.setText(_translate("MainWindow", "Delete"))
+        self.pushButton_10.setText(_translate("MainWindow", "Tree search"))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = Example()
-    sys.exit(app.exec_())
+    interface = Ui_MainWindow()
+    sys.exit(app.exec_(
