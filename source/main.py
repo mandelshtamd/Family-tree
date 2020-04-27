@@ -154,6 +154,18 @@ class Ui_MainWindow(object):
         self.label_7.setText("")
         self.label_7.setPixmap(QtGui.QPixmap("./share.PNG"))
         self.label_7.setObjectName("label_7")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setGeometry(QtCore.QRect(690, 300, 151, 151))
+        self.label_8.setText("")
+        self.label_8.setPixmap(QtGui.QPixmap("user2.png"))
+        self.label_8.setObjectName("label_8")
+        self.pushButton_11 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_11.setGeometry(QtCore.QRect(810, 300, 31, 31))
+
+        self.pushButton_11.setObjectName("pushButton_11")
+        self.pushButton_12 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_12.setGeometry(QtCore.QRect(690, 300, 31, 31))
+        self.pushButton_12.setObjectName("pushButton_12")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1184, 19))
@@ -193,6 +205,9 @@ class Ui_MainWindow(object):
         self.pushButton_10.setText(_translate("MainWindow", "Tree search"))
         self.pushButton_10.setToolTip('Click <b>here</b> to quickly find the information you need in the tree')
         QToolTip.setFont(QFont('PurisaBold', 13))
+        self.pushButton_11.setText(_translate("MainWindow", "+"))
+        self.pushButton_12.setText(_translate("MainWindow", "-"))
+
 
 
 class mywindow(QtWidgets.QMainWindow):
