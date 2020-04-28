@@ -17,9 +17,9 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>-10</x>
       <y>-10</y>
-      <width>1591</width>
+      <width>1611</width>
       <height>861</height>
      </rect>
     </property>
@@ -184,15 +184,15 @@ color: rgb(255, 255, 255);</string>
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>51</width>
-      <height>41</height>
+      <width>61</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>icon3.png</pixmap>
+     <pixmap>icontree.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
