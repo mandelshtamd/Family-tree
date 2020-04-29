@@ -6,7 +6,10 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
+from PyQt5 import QtCore, QtGui,  QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QToolTip, QDesktopWidget
+from PyQt5.QtGui import QFont
 
 class Ui_about_us(object):
     def setupUi(self, MainWindow):
@@ -100,6 +103,9 @@ class Ui_MainWindow(object):
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(510, 0, 121, 51))
+        def OpenWindow(self):
+            self.aboutUs = AboutUsWindow()
+            aboutUs.show()
         font = QtGui.QFont()
         font.setFamily("Noto Sans Mono CJK TC Bold")
         font.setPointSize(14)
