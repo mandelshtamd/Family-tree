@@ -128,8 +128,6 @@ class Graph(object):
             person = self.get_person(name_to_whom)
             person.add_spouse(spouse)
 
-
-# Some tests
 # a = Node("male", "Bobby")
 # print(a.get_gender(), a.get_name())
 # b = Node("male", "Ron")
@@ -139,3 +137,4 @@ class Graph(object):
 # tree.add_child("Bobby", b)
 # tree.add_parent("Bobby", c)
 # print(tree.get_root().get_name())
+# print(tree.get_root().get_children()[0].get_name())
