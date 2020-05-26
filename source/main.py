@@ -1,6 +1,8 @@
+import json
+import os
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import Qt, QPointF
+from PyQt5.QtCore import Qt, QPointF, QLineF, QPoint
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QToolTip, QDesktopWidget, \
     QGraphicsEllipseItem, QGraphicsItem, QGraphicsScene, QLineEdit, QInputDialog, QFormLayout, QFrame, QLabel, QDialog, \
     QGraphicsLineItem, QGraphicsPathItem
@@ -185,6 +187,11 @@ class Ui_MainWindow(QWidget):
         self.deletePerson.setEnabled(True)
 
         self.nodesMap = []
+        #!!!
+        self.loadFromJson()
+        self.rerender()
+        self.drag_position = QPoint()
+        self.current_circle = None
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -201,7 +208,7 @@ class Ui_MainWindow(QWidget):
         scene = self.QGraphicsScene
         blackPen = QPen(Qt.black)
         blackPen.setWidth(3)
-        circle = QGraphicsEllipseItem(10, 10, 100, 100)
+        circle = QGraphicsEllipseItem(-20, -20, 40, 40)
         circle.setFlag(QGraphicsItem.ItemIsMovable)
 
         device = AddDevice()
@@ -214,7 +221,8 @@ class Ui_MainWindow(QWidget):
         circle.setFlag(QGraphicsItem.isUnderMouse(circle))
         scene.addItem(circle)
         self.graphicsView.setScene(scene)
-        #self.rerender()
+        self.update()
+        self.rerender()
 
 
     def toDeletePerson(self):
@@ -226,23 +234,56 @@ class Ui_MainWindow(QWidget):
                 scene.removeItem(node)
         self.graphicsView.setScene(scene)
 
+
+    def saveToJson(self):
+        graph = {}
+        graph['nodes'] = []
+        for node in self.nodesMap:
+            graph['nodes'].append({
+                'x': str(node.x()),
+                'y': str(node.y()),
+                'name': node.name
+            })
+        with open('database.txt', 'w') as outfile:
+            json.dump(graph, outfile)
+
+    def loadFromJson(self):
+        if (os.stat("database.txt").st_size == 0):
+            return
+
+        with open('database.txt') as json_file:
+            graph = json.load(json_file)
+        for p in graph['nodes']:
+            circle = QGraphicsEllipseItem(-20, -20, 40, 40)
+            circle.setFlag(QGraphicsItem.ItemIsMovable)
+            circle.name = p["name"]
+            circle.setPos(float(p["x"]), float(p["y"]))
+            circle.setToolTip(circle.name)
+            self.nodesMap.append(circle)
+
+
+
+
+    def mouseMoveEvent(self, event):
+        self.rerender()
+        self.update()
+
+
     def rerender(self):
         scene = self.QGraphicsScene
+        for node in self.nodesMap:
+            if (node not in scene.items()):
+                scene.addItem(node)
+
         for firstNode in self.nodesMap:
             for secondNode in self.nodesMap:
-                line = QGraphicsLineItem(QtCore.QLineF(firstNode.pos(), secondNode.pos()))
+                line = QGraphicsLineItem(QLineF(firstNode.pos(), secondNode.pos()))
                 line.setFlag(QGraphicsLineItem.ItemIsMovable)
                 scene.addItem(line)
+
+        self.QGraphicsScene = scene
         self.graphicsView.setScene(scene)
-
-    # def paintEvent(self, QPaintEvent):
-    #     painter = QPainter()
-    #     painter.begin(self)
-    #     painter.setRenderHint(QPainter.Antialiasing)
-    #     painter.setPen(QtCore.Qt.red)
-    #     painter.setBrush(QtCore.Qt.white)
-    #     painter.drawLine(0, 0, 200, 200)
-
+        self.saveToJson()
 
 
 
@@ -285,6 +326,9 @@ class mywindow(QtWidgets.QMainWindow):
         super(mywindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.setMouseTracking(True)
+
         self.ui.retranslateUi(self)
         self.center()
 
