@@ -349,6 +349,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+
         self.addPerson = QtWidgets.QPushButton(self.centralwidget)
         self.addPerson.setGeometry(QtCore.QRect(810, 300, 31, 31))
         self.addPerson.clicked.connect(self.toAddPerson)
@@ -386,6 +387,7 @@ class Ui_MainWindow(object):
         circle.death = device.deathEdit.text()
         circle.mom = device.momEdit.text()
         circle.dad = device.dadEdit.text()
+        circle.spouse = device.spouseEdit.text()
         circle.photo = device.imageLabel.pixmap()
         self.nodesMap.append(circle)
 
@@ -466,7 +468,7 @@ class AddDevice(QDialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setWindowTitle("Person's information")
-        self.setFixedSize(380, 500)
+        self.setFixedSize(440, 500)
 
         self.nameLabel = QLabel("Name")
         self.nameEdit = QLineEdit()
@@ -486,8 +488,11 @@ class AddDevice(QDialog):
         self.dadLabel = QLabel("Father")
         self.dadEdit = QLineEdit()
 
+        self.spouseLabel = QLabel("Spouse")
+        self.spouseEdit = QLineEdit()
 
         self.urlEdit = QLineEdit()
+        self.pathEdit = QLineEdit()
 
 
         self.imageLabel = QLabel("No image")
@@ -496,15 +501,17 @@ class AddDevice(QDialog):
 
 
 
-        self.loadButton = QPushButton("Load photo")
-        self.loadButton.clicked.connect(self.on_load)
+        self.loadInternetButton = QPushButton("Photo from Internet")
+        self.loadInternetButton.clicked.connect(self.loadFromInternet)
+        self.loadInternetButton.setFixedSize(160, 25)
+
+        self.loadComputerButton = QPushButton("Photo from Computer")
+        self.loadComputerButton.clicked.connect(self.loadFromComputer)
 
 
-
-
-        okButton = QPushButton()
-        okButton.setText("OK")
-        okButton.clicked.connect(self.add)
+        self.okButton = QPushButton()
+        self.okButton.setText("OK")
+        self.okButton.clicked.connect(self.add)
 
         frame = QFrame(self)
 
@@ -516,19 +523,23 @@ class AddDevice(QDialog):
         formLayout.addRow(self.deathLabel, self.deathEdit)
         formLayout.addRow(self.momLabel, self.momEdit)
         formLayout.addRow(self.dadLabel, self.dadEdit)
-        formLayout.addRow(self.loadButton, self.urlEdit)
-
-
-        formLayout.addRow(okButton, okButton)
+        formLayout.addRow(self.spouseLabel, self.spouseEdit)
+        formLayout.addRow(self.loadInternetButton, self.urlEdit)
+        formLayout.addRow(self.loadComputerButton, self.pathEdit)
+        formLayout.addRow(self.okButton, self.okButton)
 
         self.exec_()
 
-    def on_load(self):
-        print("Load image")
+    def loadFromInternet(self):
         data = request.urlopen(self.urlEdit.text()).read()
         pixmap = QtGui.QPixmap()
         pixmap.loadFromData(data)
         self.imageLabel.setPixmap(pixmap)
+
+    def loadFromComputer(self):
+        hl = self.pathEdit.text()
+        self.imageLabel.setPixmap(QtGui.QPixmap(hl))
+
 
 
     def add(self):
@@ -538,6 +549,7 @@ class AddDevice(QDialog):
         death = self.deathEdit.text()
         mom = self.momEdit.text()
         dad = self.dadEdit.text()
+        spouse = self.spouseEdit.text()
         photo = self.imageLabel.pixmap()
         if (name != ""):
             self.close()
