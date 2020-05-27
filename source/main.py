@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'aboutUs.ui'
@@ -5,6 +6,7 @@
 # Created by: PyQt5 UI code generator 5.5.1
 #
 # WARNING! All changes made in this file will be lost!
+
 import json
 import os
 import sys
@@ -392,11 +394,20 @@ class Ui_MainWindow(QWidget):
         MainWindow.setStatusBar(self.statusbar)
 
 
+
         '''self.nodesMap = []
         self.loadFromJson()
         self.rerender()
         self.drag_position = QPoint()
         self.current_circle = None'''
+
+        self.nodesMap = []
+        #!!!
+        self.loadFromJson()
+        self.rerender()
+        self.drag_position = QPoint()
+        self.current_circle = None
+
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -434,13 +445,23 @@ class Ui_MainWindow(QWidget):
         self.graphicsView.setScene(vertex.scene)
 
 
+        blackPen = QPen(Qt.black)
+        blackPen.setWidth(3)
+        circle = QGraphicsEllipseItem(-20, -20, 40, 40)
+        circle.setFlag(QGraphicsItem.ItemIsMovable)
 
+        device = AddDevice()
+        circle.name = device.iText.text()
+        circle.bornYear = device.pText.text()
+        circle.status = device.uText.text()
+        circle.setToolTip(circle.name)
+        self.nodesMap.append(circle)
 
-
-
-
-
-
+        circle.setFlag(QGraphicsItem.isUnderMouse(circle))
+        scene.addItem(circle)
+        self.graphicsView.setScene(scene)
+        self.update()
+        self.rerender()
 
 
     def toDeletePerson(self):
@@ -461,7 +482,11 @@ class Ui_MainWindow(QWidget):
                 scene.removeItem(node)'''
         self.graphicsView.setScene(scene)
 
+
     '''def saveToJson(self):
+
+    def saveToJson(self):
+
         graph = {}
         graph['nodes'] = []
         for node in self.nodesMap:
@@ -487,6 +512,7 @@ class Ui_MainWindow(QWidget):
             circle.setToolTip(circle.name)
             self.nodesMap.append(circle)
 
+
     def mouseMoveEvent(self, event):
         self.rerender()
         self.update()
@@ -502,6 +528,10 @@ class Ui_MainWindow(QWidget):
                 line = QGraphicsLineItem(QLineF(firstNode.pos(), secondNode.pos()))
                 line.setFlag(QGraphicsLineItem.ItemIsMovable)
                 scene.addItem(line)
+
+        self.QGraphicsScene = scene
+        self.graphicsView.setScene(scene)
+        self.saveToJson()
 
         self.QGraphicsScene = scene
         self.graphicsView.setScene(scene)
@@ -554,6 +584,9 @@ class mywindow(QtWidgets.QMainWindow):
         super(mywindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.setMouseTracking(True)
+
         self.ui.retranslateUi(self)
         self.center()
 
