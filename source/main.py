@@ -6,6 +6,11 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QTo
     QGraphicsLineItem, QGraphicsPathItem
 from PyQt5.QtGui import QFont, QPen, QPainter
 
+from pymongo import MongoClient
+import json
+import pprint
+import os
+
 
 class Ui_MainWindow(QWidget):
     def setupUi(self, MainWindow):
@@ -22,7 +27,7 @@ class Ui_MainWindow(QWidget):
         font.setWeight(75)
 
         self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
-        self.graphicsView.setStyleSheet("background-image: url(./фон4.png)")    
+        self.graphicsView.setStyleSheet("background-image: url(./фон4.png)")
         self.graphicsView.setGeometry(QtCore.QRect(-29, 110, 1630, 871))
         self.graphicsView.setObjectName("graphicsView")
         self.QGraphicsScene = QGraphicsScene()
@@ -39,7 +44,7 @@ class Ui_MainWindow(QWidget):
         font.setItalic(True)
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("background-color: rgb(18, 18, 18);\n"
-"color: rgb(255, 255, 255);")
+                                      "color: rgb(255, 255, 255);")
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(240, 0, 111, 51))
@@ -50,7 +55,7 @@ class Ui_MainWindow(QWidget):
         font.setWeight(75)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setStyleSheet("background-color: rgb(48, 48, 48);\n"
-"color: rgb(255, 255, 255);")
+                                        "color: rgb(255, 255, 255);")
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(349, 0, 171, 51))
@@ -61,7 +66,7 @@ class Ui_MainWindow(QWidget):
         font.setWeight(75)
         self.pushButton_3.setFont(font)
         self.pushButton_3.setStyleSheet("background-color: rgb(48, 48, 48);\n"
-"color: rgb(255, 255, 255);")
+                                        "color: rgb(255, 255, 255);")
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(510, 0, 121, 51))
@@ -72,12 +77,12 @@ class Ui_MainWindow(QWidget):
         font.setWeight(75)
         self.pushButton_4.setFont(font)
         self.pushButton_4.setStyleSheet("background-color: rgb(48, 48, 48);\n"
-"color: rgb(255, 255, 255);")
+                                        "color: rgb(255, 255, 255);")
         self.pushButton_4.setObjectName("pushButton_4")
         self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_5.setGeometry(QtCore.QRect(620, 0, 661, 51))
         self.pushButton_5.setStyleSheet("background-color: rgb(48, 48, 48);\n"
-"color: rgb(255, 255, 255);")
+                                        "color: rgb(255, 255, 255);")
         self.pushButton_5.setText("")
         self.pushButton_5.setObjectName("pushButton_5")
         self.pushButton_6 = QtWidgets.QPushButton(self.centralwidget)
@@ -89,7 +94,7 @@ class Ui_MainWindow(QWidget):
         font.setWeight(75)
         self.pushButton_6.setFont(font)
         self.pushButton_6.setStyleSheet("background-color: rgb(48, 48, 48);\n"
-"color: rgb(255, 255, 255);")
+                                        "color: rgb(255, 255, 255);")
         self.pushButton_6.setObjectName("pushButton_6")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(10, 0, 51, 41))
@@ -110,7 +115,7 @@ class Ui_MainWindow(QWidget):
         font.setWeight(75)
         self.pushButton_7.setFont(font)
         self.pushButton_7.setStyleSheet("background-color: rgb(48, 48, 48);\n"
-"color: rgb(255, 255, 255);")
+                                        "color: rgb(255, 255, 255);")
         self.pushButton_7.setObjectName("pushButton_7")
         self.pushButton_8 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_8.setGeometry(QtCore.QRect(1170, 70, 131, 41))
@@ -121,7 +126,7 @@ class Ui_MainWindow(QWidget):
         font.setWeight(75)
         self.pushButton_8.setFont(font)
         self.pushButton_8.setStyleSheet("background-color: rgb(48, 48, 48);\n"
-"color: rgb(255, 255, 255);")
+                                        "color: rgb(255, 255, 255);")
         self.pushButton_8.setObjectName("pushButton_8")
         self.pushButton_9 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_9.setGeometry(QtCore.QRect(1290, 70, 141, 41))
@@ -132,7 +137,7 @@ class Ui_MainWindow(QWidget):
         font.setWeight(75)
         self.pushButton_9.setFont(font)
         self.pushButton_9.setStyleSheet("background-color: rgb(48, 48, 48);\n"
-"color: rgb(255, 255, 255);")
+                                        "color: rgb(255, 255, 255);")
         self.pushButton_9.setObjectName("pushButton_9")
         self.pushButton_10 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_10.setGeometry(QtCore.QRect(1410, 70, 181, 41))
@@ -143,7 +148,7 @@ class Ui_MainWindow(QWidget):
         font.setWeight(75)
         self.pushButton_10.setFont(font)
         self.pushButton_10.setStyleSheet("background-color: rgb(48, 48, 48);\n"
-"color: rgb(255, 255, 255);")
+                                         "color: rgb(255, 255, 255);")
         self.pushButton_10.setObjectName("pushButton_10")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(1410, 70, 31, 41))
@@ -176,8 +181,6 @@ class Ui_MainWindow(QWidget):
         self.addPerson.setEnabled(True)
         self.addPerson.setObjectName("addPerson")
 
-
-
         self.deletePerson = QtWidgets.QPushButton(self.centralwidget)
         self.deletePerson.setGeometry(QtCore.QRect(690, 300, 31, 31))
         self.deletePerson.setObjectName("deletePerson")
@@ -194,8 +197,6 @@ class Ui_MainWindow(QWidget):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
-
 
     def toAddPerson(self):
         scene = self.QGraphicsScene
@@ -214,8 +215,7 @@ class Ui_MainWindow(QWidget):
         circle.setFlag(QGraphicsItem.isUnderMouse(circle))
         scene.addItem(circle)
         self.graphicsView.setScene(scene)
-        #self.rerender()
-
+        # self.rerender()
 
     def toDeletePerson(self):
         scene = self.QGraphicsScene
@@ -242,9 +242,6 @@ class Ui_MainWindow(QWidget):
     #     painter.setPen(QtCore.Qt.red)
     #     painter.setBrush(QtCore.Qt.white)
     #     painter.drawLine(0, 0, 200, 200)
-
-
-
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -277,7 +274,6 @@ class Ui_MainWindow(QWidget):
         QToolTip.setFont(QFont('PurisaBold', 13))
         self.addPerson.setText(_translate("MainWindow", "+"))
         self.deletePerson.setText(_translate("MainWindow", "-"))
-
 
 
 class mywindow(QtWidgets.QMainWindow):
@@ -332,12 +328,54 @@ class AddDevice(QDialog):
             self.close()
 
 
+"""
+collection - trees
+tree - json string
+function deletes all in database and insert new tree
+"""
+def add_to_db(db, collection, tree):
+    db.collection.remove()
+    collection.insert_one(tree)
 
+
+"""
+collection - trees
+name - name of person
+"""
+def get_from_db(collection):
+    return collection.find_one()
+
+"""
+collection - trees
+prints dictionary(json) from db
+"""
+def print_db(collection):
+    print(get_from_db(collection))
 
 
 if __name__ == '__main__':
+
+    """ 
+    connecting database
+    """
+    path = "/tmp/dbdata"
+    try:
+        os.mkdir(path)
+    except OSError:
+        print("Directory was not created (it is Ok if folder dbdata was created earlier)")
+    else:
+        print("Directory was created successfully")
+    os.system("mongod --dbpath /tmp/dbdata")
+    client = MongoClient()
+
+    """
+    creating database "my_database" and collection "trees"
+    """
+    db = client.my_database
+    trees = db.trees
+
+
     app = QtWidgets.QApplication([])
     application = mywindow()
     application.show()
-
     sys.exit(app.exec_())
