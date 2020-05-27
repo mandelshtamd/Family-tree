@@ -5,14 +5,52 @@
 # Created by: PyQt5 UI code generator 5.5.1
 #
 # WARNING! All changes made in this file will be lost!
+import json
+import os
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import Qt, QPointF
+from PyQt5.QtCore import Qt, QPointF, QLineF, QPoint
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QToolTip, QDesktopWidget, \
     QGraphicsEllipseItem, QGraphicsItem, QGraphicsScene, QLineEdit, QInputDialog, QFormLayout, QFrame, QLabel, QDialog, \
     QGraphicsLineItem, QGraphicsPathItem
 from PyQt5.QtGui import QFont, QPen, QPainter
 from urllib import request
+humans = {}
+class Vertex:
+    def __init__(self, name, surname, birth, death, mom, dad, photo, scene):
+        self.name = name
+        self.surname = surname
+        global humans
+        humans[name + " " + surname] = self
+        self.birth = birth
+        self.death = death
+        self.photo = photo
+        self.family = []
+        self.edges = []
+
+        self.scene = scene
+        self.circle = QGraphicsEllipseItem(10, 10, 100, 100)
+        self.circle.setFlag(QGraphicsItem.ItemIsMovable)
+
+        if mom != "" and mom in humans and mom != name + " " + surname:
+            self.family.append(humans[mom])
+            humans[mom].family.append(self)
+            line = QGraphicsLineItem(QLineF(self.circle.pos(), humans[mom].circle.pos()))
+            line.setFlag(QGraphicsLineItem.ItemIsMovable)
+            self.scene.addItem(line)
+            self.edges.append(line)
+            humans[mom].edges.append(line)
+
+        if dad != "" and dad in humans and dad != name + " " + surname:
+            self.family.append(humans[dad])
+            humans[dad].family.append(self)
+            line = QGraphicsLineItem(QLineF(self.circle.pos(), humans[dad].circle.pos()))
+            line.setFlag(QGraphicsLineItem.ItemIsMovable)
+            self.scene.addItem(line)
+            self.edges.append(line)
+            humans[dad].edges.append(line)
+
+        self.scene.addItem(self.circle)
 
 class Ui_about_us(object):
     def setupUi(self, MainWindow):
@@ -354,7 +392,11 @@ class Ui_MainWindow(QWidget):
         MainWindow.setStatusBar(self.statusbar)
 
 
-        self.nodesMap = []
+        '''self.nodesMap = []
+        self.loadFromJson()
+        self.rerender()
+        self.drag_position = QPoint()
+        self.current_circle = None'''
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -369,48 +411,101 @@ class Ui_MainWindow(QWidget):
         filename, ok = QInputDialog.getText(self, 'Open project', 'Enter project name')
 
 
+
+
+
+
+
+
     def toAddPerson(self):
-        scene = self.QGraphicsScene
-        blackPen = QPen(Qt.black)
-        blackPen.setWidth(3)
-        circle = QGraphicsEllipseItem(10, 10, 100, 100)
-        circle.setFlag(QGraphicsItem.ItemIsMovable)
-
         device = AddDevice()
-        circle.name = device.nameEdit.text()
-        circle.surname = device.surnameEdit.text()
-        circle.birth = device.birthEdit.text()
-        circle.death = device.deathEdit.text()
-        circle.mom = device.momEdit.text()
-        circle.dad = device.dadEdit.text()
-        circle.spouse = device.spouseEdit.text()
-        circle.photo = device.imageLabel.pixmap()
-        self.nodesMap.append(circle)
+        scene = self.QGraphicsScene
 
-        circle.setFlag(QGraphicsItem.isUnderMouse(circle))
-        scene.addItem(circle)
-        self.graphicsView.setScene(scene)
-        # self.rerender()
+        name = device.nameEdit.text()
+        surname = device.surnameEdit.text()
+        birth = device.birthEdit.text()
+        death = device.deathEdit.text()
+        mom = device.momEdit.text()
+        dad = device.dadEdit.text()
+        #spouse = device.spouseEdit.text()
+        photo = device.imageLabel.pixmap()
+
+        vertex = Vertex(name, surname, birth, death, mom, dad, photo, scene)
+        self.graphicsView.setScene(vertex.scene)
+
+
+
+
+
+
+
+
+
+
 
     def toDeletePerson(self):
         scene = self.QGraphicsScene
         nameToDelete, ok = QInputDialog.getText(self, 'Delete person', 'Who you want to delete?:')
         print(nameToDelete)
-        for node in self.nodesMap:
+        if nameToDelete in humans:
+            obj = humans[nameToDelete]
+            for relatives in obj.family:
+                relatives.family.remove(obj)
+            for edge in obj.edges:
+                obj.scene.removeItem(edge) #del edge
+            obj.scene.removeItem(obj.circle)
+            del obj
+            del humans[nameToDelete]
+        '''for node in self.nodesMap:
             if (node.name == nameToDelete):
-                scene.removeItem(node)
+                scene.removeItem(node)'''
         self.graphicsView.setScene(scene)
+
+    '''def saveToJson(self):
+        graph = {}
+        graph['nodes'] = []
+        for node in self.nodesMap:
+            graph['nodes'].append({
+                'x': str(node.x()),
+                'y': str(node.y()),
+                'name': node.name
+            })
+        with open('database.txt', 'w') as outfile:
+            json.dump(graph, outfile)
+
+    def loadFromJson(self):
+        if (os.stat("database.txt").st_size == 0):
+            return
+
+        with open('database.txt') as json_file:
+            graph = json.load(json_file)
+        for p in graph['nodes']:
+            circle = QGraphicsEllipseItem(-20, -20, 40, 40)
+            circle.setFlag(QGraphicsItem.ItemIsMovable)
+            circle.name = p["name"]
+            circle.setPos(float(p["x"]), float(p["y"]))
+            circle.setToolTip(circle.name)
+            self.nodesMap.append(circle)
+
+    def mouseMoveEvent(self, event):
+        self.rerender()
+        self.update()
 
     def rerender(self):
         scene = self.QGraphicsScene
+        for node in self.nodesMap:
+            if (node not in scene.items()):
+                scene.addItem(node)
+
         for firstNode in self.nodesMap:
             for secondNode in self.nodesMap:
-                line = QGraphicsLineItem(QtCore.QLineF(firstNode.pos(), secondNode.pos()))
+                line = QGraphicsLineItem(QLineF(firstNode.pos(), secondNode.pos()))
                 line.setFlag(QGraphicsLineItem.ItemIsMovable)
                 scene.addItem(line)
+
+        self.QGraphicsScene = scene
         self.graphicsView.setScene(scene)
-
-
+        self.saveToJson()'''
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -449,6 +544,9 @@ class Ui_MainWindow(QWidget):
 
         #self.addPerson.setText(_translate("MainWindow", "+"))
         #self.deletePerson.setText(_translate("MainWindow", "-"))
+
+
+
 
 
 class mywindow(QtWidgets.QMainWindow):
