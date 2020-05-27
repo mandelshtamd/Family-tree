@@ -588,9 +588,6 @@ class AddDevice(QDialog):
         self.dadLabel = QLabel("Father")
         self.dadEdit = QLineEdit()
 
-        self.spouseLabel = QLabel("Spouse")
-        self.spouseEdit = QLineEdit()
-
         self.urlEdit = QLineEdit()
         self.pathEdit = QLineEdit()
 
@@ -623,7 +620,6 @@ class AddDevice(QDialog):
         formLayout.addRow(self.deathLabel, self.deathEdit)
         formLayout.addRow(self.momLabel, self.momEdit)
         formLayout.addRow(self.dadLabel, self.dadEdit)
-        formLayout.addRow(self.spouseLabel, self.spouseEdit)
         formLayout.addRow(self.loadInternetButton, self.urlEdit)
         formLayout.addRow(self.loadComputerButton, self.pathEdit)
         formLayout.addRow(self.okButton, self.okButton)
