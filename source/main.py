@@ -165,7 +165,7 @@ class Ui_about_us(object):
                                            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-style:italic;\">              </span></p></body></html>"))
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QWidget):
     def OpenWindow(self):
         self.aboutUs = AboutUsWindow()
         self.aboutUs.show()
@@ -204,7 +204,7 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(240, 0, 111, 51))
+        self.pushButton_2.setGeometry(QtCore.QRect(250, 0, 181, 51))
         font = QtGui.QFont()
         font.setFamily("Noto Sans Mono CJK TC Bold")
         font.setPointSize(14)
@@ -214,8 +214,10 @@ class Ui_MainWindow(object):
         self.pushButton_2.setStyleSheet("background-color: rgb(48, 48, 48);\n"
 "color: rgb(255, 255, 255);")
         self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.clicked.connect(self.openFile)
+
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(349, 0, 171, 51))
+        self.pushButton_3.setGeometry(QtCore.QRect(409, 0, 161, 51))
         font = QtGui.QFont()
         font.setFamily("Noto Sans Mono CJK TC Bold")
         font.setPointSize(14)
@@ -226,7 +228,7 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(QtCore.QRect(510, 0, 121, 51))
+        self.pushButton_4.setGeometry(QtCore.QRect(640, 0, 151, 51))
         self.pushButton_4.clicked.connect(self.OpenWindow)
         font = QtGui.QFont()
         font.setFamily("Noto Sans Mono CJK TC Bold")
@@ -238,7 +240,7 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.pushButton_4.setObjectName("pushButton_4")
         self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_5.setGeometry(QtCore.QRect(620, 0, 661, 51))
+        self.pushButton_5.setGeometry(QtCore.QRect(780, 0, 501, 51))
         self.pushButton_5.setStyleSheet("background-color: rgb(48, 48, 48);\n"
 "color: rgb(255, 255, 255);")
         self.pushButton_5.setText("")
@@ -265,7 +267,7 @@ class Ui_MainWindow(object):
         self.label_3.setPixmap(QtGui.QPixmap("./leave1.png"))
         self.label_3.setObjectName("label_3")
         self.pushButton_7 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_7.setGeometry(QtCore.QRect(1070, 70, 131, 41))
+        self.pushButton_7.setGeometry(QtCore.QRect(1020, 70, 141, 41))
         font = QtGui.QFont()
         font.setFamily("Noto Sans Mono CJK TC Bold")
         font.setPointSize(14)
@@ -276,7 +278,7 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.pushButton_7.setObjectName("pushButton_7")
         self.pushButton_8 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_8.setGeometry(QtCore.QRect(1170, 70, 131, 41))
+        self.pushButton_8.setGeometry(QtCore.QRect(1140, 70, 131, 41))
         font = QtGui.QFont()
         font.setFamily("Noto Sans Mono CJK TC Bold")
         font.setPointSize(14)
@@ -286,8 +288,9 @@ class Ui_MainWindow(object):
         self.pushButton_8.setStyleSheet("background-color: rgb(48, 48, 48);\n"
 "color: rgb(255, 255, 255);")
         self.pushButton_8.setObjectName("pushButton_8")
+        self.pushButton_8.clicked.connect(self.toAddPerson)
         self.pushButton_9 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_9.setGeometry(QtCore.QRect(1290, 70, 141, 41))
+        self.pushButton_9.setGeometry(QtCore.QRect(1250, 70, 191, 41))
         font = QtGui.QFont()
         font.setFamily("Noto Sans Mono CJK TC Bold")
         font.setPointSize(14)
@@ -297,11 +300,12 @@ class Ui_MainWindow(object):
         self.pushButton_9.setStyleSheet("background-color: rgb(48, 48, 48);\n"
 "color: rgb(255, 255, 255);")
         self.pushButton_9.setObjectName("pushButton_9")
+        self.pushButton_9.clicked.connect(self.toDeletePerson)
         self.pushButton_10 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_10.setGeometry(QtCore.QRect(1410, 70, 181, 41))
         font = QtGui.QFont()
         font.setFamily("Noto Sans Mono CJK TC Bold")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_10.setFont(font)
@@ -314,33 +318,32 @@ class Ui_MainWindow(object):
         self.label_4.setPixmap(QtGui.QPixmap("./treesearch.PNG"))
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(1290, 70, 31, 31))
+        self.label_5.setGeometry(QtCore.QRect(1250, 70, 31, 31))
         self.label_5.setText("")
         self.label_5.setPixmap(QtGui.QPixmap("./cross.png"))
         self.label_5.setObjectName("label_5")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
-        self.label_6.setGeometry(QtCore.QRect(1180, 70, 31, 31))
+        self.label_6.setGeometry(QtCore.QRect(1130, 70, 31, 31))
         self.label_6.setText("")
-        self.label_6.setPixmap(QtGui.QPixmap("./save.png"))
+        self.label_6.setPixmap(QtGui.QPixmap("plus1.png"))
         self.label_6.setObjectName("label_6")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
-        self.label_7.setGeometry(QtCore.QRect(1070, 70, 41, 31))
+        self.label_7.setGeometry(QtCore.QRect(1020, 70, 41, 31))
         self.label_7.setText("")
         self.label_7.setPixmap(QtGui.QPixmap("./share.PNG"))
         self.label_7.setObjectName("label_7")
-        self.label_8 = QtWidgets.QLabel(self.centralwidget)
-        self.label_8.setGeometry(QtCore.QRect(690, 300, 151, 151))
-        self.label_8.setText("")
-        self.label_8.setPixmap(QtGui.QPixmap("user2.png"))
-        self.label_8.setObjectName("label_8")
-
         self.pushButton_11 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_11.setGeometry(QtCore.QRect(810, 300, 31, 31))
-
+        self.pushButton_11.setGeometry(QtCore.QRect(559, 0, 101, 51))
+        font = QtGui.QFont()
+        font.setFamily("Noto Sans Mono CJK TC Bold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_11.setFont(font)
+        self.pushButton_11.setStyleSheet("background-color: rgb(48, 48, 48);\n"
+                                         "color: rgb(255, 255, 255);")
         self.pushButton_11.setObjectName("pushButton_11")
-        self.pushButton_12 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_12.setGeometry(QtCore.QRect(690, 300, 31, 31))
-        self.pushButton_12.setObjectName("pushButton_12")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1184, 19))
@@ -350,17 +353,6 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.addPerson = QtWidgets.QPushButton(self.centralwidget)
-        self.addPerson.setGeometry(QtCore.QRect(810, 300, 31, 31))
-        self.addPerson.clicked.connect(self.toAddPerson)
-        self.addPerson.setEnabled(True)
-        self.addPerson.setObjectName("addPerson")
-
-        self.deletePerson = QtWidgets.QPushButton(self.centralwidget)
-        self.deletePerson.setGeometry(QtCore.QRect(690, 300, 31, 31))
-        self.deletePerson.setObjectName("deletePerson")
-        self.deletePerson.clicked.connect(self.toDeletePerson)
-        self.deletePerson.setEnabled(True)
 
         self.nodesMap = []
 
@@ -372,6 +364,10 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+
+    def openFile(self):
+        filename, ok = QInputDialog.getText(self, 'Open project', 'Enter project name')
+
 
     def toAddPerson(self):
         scene = self.QGraphicsScene
@@ -420,8 +416,8 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "GeneTreetion"))
-        self.pushButton_2.setText(_translate("MainWindow", "My trees"))
-        self.pushButton_2.setToolTip('Click <b>here</b> to start a new project or continue the old one')
+        self.pushButton_2.setText(_translate("MainWindow", "Open project"))
+        self.pushButton_2.setToolTip('Click <b>here</b> to change your old project')
         QToolTip.setFont(QFont('PurisaBold', 13))
 
         self.pushButton_3.setText(_translate("MainWindow", "Language"))
@@ -435,18 +431,24 @@ class Ui_MainWindow(object):
         self.pushButton_7.setToolTip('Click <b>here</b> to share your family tree with others')
         QToolTip.setFont(QFont('PurisaBold', 13))
 
-        self.pushButton_8.setText(_translate("MainWindow", "Save"))
-        self.pushButton_8.setToolTip('Click <b>here</b> to save project on your computer')
+        self.pushButton_8.setText(_translate("MainWindow", "Add node"))
+        self.pushButton_8.setToolTip('Click <b>here</b> to add node to your family tree')
         QToolTip.setFont(QFont('PurisaBold', 13))
 
-        self.pushButton_9.setText(_translate("MainWindow", "Delete"))
-        self.pushButton_9.setToolTip('Click <b>here</b> to delete current project')
+        self.pushButton_9.setText(_translate("MainWindow", "Delete node"))
+        self.pushButton_9.setToolTip('Click <b>here</b> to delete node from your family tree')
         QToolTip.setFont(QFont('PurisaBold', 13))
+
         self.pushButton_10.setText(_translate("MainWindow", "Tree search"))
         self.pushButton_10.setToolTip('Click <b>here</b> to quickly find the information you need in the tree')
         QToolTip.setFont(QFont('PurisaBold', 13))
-        self.addPerson.setText(_translate("MainWindow", "+"))
-        self.deletePerson.setText(_translate("MainWindow", "-"))
+
+        self.pushButton_11.setText(_translate("MainWindow", "Help"))
+        self.pushButton_11.setToolTip('Click <b>here</b> if you need some tips how to use GeneTreetion')
+        QToolTip.setFont(QFont('PurisaBold', 13))
+
+        #self.addPerson.setText(_translate("MainWindow", "+"))
+        #self.deletePerson.setText(_translate("MainWindow", "-"))
 
 
 class mywindow(QtWidgets.QMainWindow):
